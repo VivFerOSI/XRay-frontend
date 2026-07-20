@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Mail, Phone } from 'lucide-react'
+import logoXray from '../assets/logo-xray-blanco.png'
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -10,16 +11,7 @@ const InstagramIcon = () => (
 )
 
 const XRayLogo = () => (
-  <div className="flex items-center gap-3">
-    <div className="relative w-8 h-8">
-      <svg viewBox="0 0 36 36" fill="none" className="w-full h-full">
-        <circle cx="18" cy="18" r="17" stroke="#C8922A" strokeWidth="1.5" />
-        <line x1="6" y1="6" x2="30" y2="30" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="30" y1="6" x2="6" y2="30" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-      </svg>
-    </div>
-    <span className="font-display font-bold text-white text-lg">X-Ray</span>
-  </div>
+  <img src={logoXray} alt="X-Ray" className="h-9 w-auto" />
 )
 
 export default function Footer() {

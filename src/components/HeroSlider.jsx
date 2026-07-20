@@ -10,21 +10,22 @@ const slides = [
   {
     image: veleros,
     overlay: 'bg-navy-deep/55',
-    title: 'Aprende la estrategia. Saborea la travesía. Actúa poniendo el viento a favor.',
+    title: 'Aprende la estrategia. Disfruta la travesía. Actúa poniendo el viento a favor.',
     cta: 'Servicios',
     href: '/servicios',
   },
   {
     image: paracaidistas,
     overlay: 'bg-navy-deep/50',
-    title: 'El alto rendimiento no es talento. Es entrenamiento deliberado en equipo.',
+    title: 'Sincronizamos talentos. Forjamos equipos capaces de alcanzar cualquier meta con precisión.',
     cta: 'Ver servicios de equipo',
     href: '/servicios#equipos',
   },
   {
     image: violonchelo,
     overlay: 'bg-navy-deep/60',
-    title: 'Donde la profundidad filosófica y la eficiencia técnica se encuentran.',
+    title: 'Detén lo que estás haciendo y préstate atención.',
+    subtitle: 'Para transformar la cultura de tu empresa, primero: pausar la inercia y segundo, rediseñar la estrategia desde las personas.',
     cta: 'Conocé X-Ray',
     href: '/#quienes-somos',
   },
@@ -76,9 +77,14 @@ export default function HeroSlider() {
 
           <div className="relative z-10 flex items-center min-h-screen">
             <div className="max-w-2xl px-8 lg:pl-16">
-              <h1 className="font-display font-bold text-white text-4xl lg:text-6xl leading-tight mb-8">
+              <h1 className="font-display font-bold text-white text-4xl lg:text-6xl leading-tight mb-6">
                 {slide.title}
               </h1>
+              {slide.subtitle && (
+                <p className="font-body text-white/75 text-lg lg:text-xl leading-relaxed mb-8 max-w-xl">
+                  {slide.subtitle}
+                </p>
+              )}
               <Button
                 asChild
                 className="bg-navy-mid text-white hover:bg-gold border-0 rounded-full px-8 py-3 h-auto font-body font-medium text-base"
@@ -91,6 +97,13 @@ export default function HeroSlider() {
           </div>
         </div>
       ))}
+
+      {/* Frase institucional fija — persiste en todos los slides */}
+      <div className="absolute top-24 lg:top-28 left-0 right-0 z-30 px-8 lg:pl-16 pointer-events-none">
+        <p className="font-display italic text-gold text-lg lg:text-2xl leading-snug max-w-lg">
+          Diseño organizacional con sentido, rigurosidad y disfrute.
+        </p>
+      </div>
 
       <Button
         variant="ghost"

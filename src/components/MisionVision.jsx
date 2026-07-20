@@ -34,7 +34,7 @@ export default function MisionVision() {
               MISIÓN
             </h3>
             <p className="font-body text-white/60 text-base leading-relaxed text-center">
-              Co-crear entornos organizacionales conscientes donde la tecnología agiliza los procesos y el pensamiento profundo y el disfrute del camino eleva el liderazgo, permitiendo que las empresas transiten y trasciendan sus conflictos y alcancen su máximo potencial colectivo.
+              Co-creamos organizaciones conscientes donde la tecnología agiliza procesos, el pensamiento crítico guía las decisiones y el disfrute del camino eleva el liderazgo; acompañamos a las empresas a trascender conflictos y alcanzar su máximo potencial colectivo.
             </p>
           </motion.div>
 
@@ -50,7 +50,7 @@ export default function MisionVision() {
               VISIÓN
             </h3>
             <p className="font-body text-white/60 text-base leading-relaxed text-center">
-              Disfrutar el ejercicio de una concepción de consultoría organizacional donde la eficiencia técnica y la profundidad filosófica convergen para contribuir con el diseño de empresas más humanas, ágiles, eficaces y profundamente conectadas con su entorno.
+              Generar consultoría que conjuga eficiencia técnica, pensamiento crítico aplicado y cuidado de las personas, acompañando a las organizaciones hacia mayor agilidad, eficacia y propósito compartido.
             </p>
           </motion.div>
         </div>

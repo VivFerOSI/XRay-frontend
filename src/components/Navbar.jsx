@@ -9,18 +9,10 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import logoXray from '../assets/logo-xray-blanco.png'
 
 const XRayLogo = () => (
-  <div className="flex items-center gap-3">
-    <div className="w-9 h-9">
-      <svg viewBox="0 0 36 36" fill="none" className="w-full h-full">
-        <circle cx="18" cy="18" r="17" stroke="#C8922A" strokeWidth="1.5" />
-        <line x1="6" y1="6" x2="30" y2="30" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="30" y1="6" x2="6" y2="30" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-      </svg>
-    </div>
-    <span className="font-display font-bold text-white text-xl tracking-wide">X-Ray</span>
-  </div>
+  <img src={logoXray} alt="X-Ray" className="h-10 w-auto" />
 )
 
 const navLinks = [

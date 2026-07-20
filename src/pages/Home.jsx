@@ -2,6 +2,7 @@ import HeroSlider from '../components/HeroSlider'
 import QuienesSomos from '../components/QuienesSomos'
 import MisionVision from '../components/MisionVision'
 import Valores from '../components/Valores'
+import JobDescription from '../components/JobDescription'
 import ContactSection from '../components/ContactSection'
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <QuienesSomos />
         <MisionVision />
         <Valores />
+        <JobDescription />
       </div>
       <ContactSection />
     </main>
