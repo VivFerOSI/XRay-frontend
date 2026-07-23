@@ -49,6 +49,26 @@ export default function JobDescription() {
               <ArrowUpRight size={16} />
             </a>
           </Button>
+
+          {/*
+            FASE 2 — Botón de acceso a la Autoevaluación de Competencias.
+            Oculto por ahora. Para reactivarlo:
+              1. Reponer imports:  import { Link } from 'react-router-dom'
+                 y  ClipboardCheck  en el import de 'lucide-react'.
+              2. Envolver este botón y el de arriba en un contenedor flex
+                 (flex flex-col sm:flex-row items-center justify-center gap-4).
+
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-navy-deep hover:border-gold px-8 py-3 h-auto font-body font-medium text-base gap-2"
+            >
+              <Link to="/autoevaluacion">
+                Autoevaluación de competencias
+                <ClipboardCheck size={16} />
+              </Link>
+            </Button>
+          */}
         </motion.div>
       </div>
     </section>

@@ -33,12 +33,49 @@ const textareaClass = [
   'px-0 pt-3 resize-none transition-colors duration-200',
 ].join(' ')
 
+// Endpoint de Formspree. El ID va en VITE_FORMSPREE_ID (ver .env.example).
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
+const FORMSPREE_ENDPOINT = FORMSPREE_ID
+  ? `https://formspree.io/f/${FORMSPREE_ID}`
+  : null
+
 export default function ContactSection() {
   const [form, setForm] = useState({ nombre: '', apellido: '', email: '', puesto: '', consulta: '' })
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-  const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+
+    if (!FORMSPREE_ENDPOINT) {
+      setError('El formulario no está disponible por el momento. Escribinos por email o WhatsApp y te respondemos a la brevedad.')
+      return
+    }
+
+    setSending(true)
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setSent(true)
+      } else {
+        const data = await res.json().catch(() => null)
+        const detail = data?.errors?.map((x) => x.message).join(', ')
+        setError(detail || 'No se pudo enviar el mensaje. Intentá de nuevo.')
+      }
+    } catch {
+      setError('Error de conexión. Revisá tu internet e intentá de nuevo.')
+    } finally {
+      setSending(false)
+    }
+  }
 
   return (
     <section id="contacto" className="bg-navy-deep">
@@ -194,12 +231,17 @@ export default function ContactSection() {
                 />
               </div>
 
+              {error && (
+                <p className="font-body text-sm text-rose-300">{error}</p>
+              )}
+
               <Button
                 type="submit"
+                disabled={sending}
                 className="w-full bg-gold text-white hover:bg-gold/90 active:bg-gold/80 border-0 rounded-full h-13 font-body font-semibold text-sm gap-2 tracking-wide mt-2 transition-all duration-200"
               >
-                Enviar mensaje
-                <ArrowRight size={16} />
+                {sending ? 'Enviando…' : 'Enviar mensaje'}
+                {!sending && <ArrowRight size={16} />}
               </Button>
             </form>
           )}

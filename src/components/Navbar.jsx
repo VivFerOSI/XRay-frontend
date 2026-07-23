@@ -36,17 +36,6 @@ export default function Navbar() {
     setSheetOpen(false)
   }, [location])
 
-  const handleAnchorClick = (e, href) => {
-    if (href.startsWith('/#')) {
-      e.preventDefault()
-      const id = href.slice(2)
-      setTimeout(() => {
-        const el = document.getElementById(id)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    }
-  }
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
@@ -64,7 +53,6 @@ export default function Navbar() {
             <Link
               key={link.label}
               to={link.href}
-              onClick={(e) => handleAnchorClick(e, link.href)}
               className="font-body text-white hover:text-gold transition-colors duration-200 text-sm font-medium"
             >
               {link.label}
@@ -80,7 +68,6 @@ export default function Navbar() {
           >
             <Link
               to="/#contacto"
-              onClick={(e) => handleAnchorClick(e, '/#contacto')}
             >
               Contacto
             </Link>
@@ -114,8 +101,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  onClick={(e) => handleAnchorClick(e, link.href)}
-                  className="font-body text-white hover:text-gold transition-colors duration-200 text-base"
+                      className="font-body text-white hover:text-gold transition-colors duration-200 text-base"
                 >
                   {link.label}
                 </Link>
@@ -125,12 +111,7 @@ export default function Navbar() {
                 variant="outline"
                 className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold font-body mt-4"
               >
-                <Link
-                  to="/#contacto"
-                  onClick={(e) => handleAnchorClick(e, '/#contacto')}
-                >
-                  Contacto
-                </Link>
+                <Link to="/#contacto">Contacto</Link>
               </Button>
             </div>
           </SheetContent>
