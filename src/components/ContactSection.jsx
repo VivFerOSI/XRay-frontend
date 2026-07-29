@@ -39,8 +39,12 @@ const FORMSPREE_ENDPOINT = FORMSPREE_ID
   ? `https://formspree.io/f/${FORMSPREE_ID}`
   : null
 
+// Límites de longitud por campo (evita envíos abusivos).
+const MAX = { nombre: 60, apellido: 60, email: 120, puesto: 80, consulta: 1500 }
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export default function ContactSection() {
-  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', puesto: '', consulta: '' })
+  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', puesto: '', consulta: '', _gotcha: '' })
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
@@ -50,6 +54,29 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+
+    // Honeypot: si el campo trampa viene lleno, es un bot → simulamos éxito y cortamos.
+    if (form._gotcha) {
+      setSent(true)
+      return
+    }
+
+    const data = {
+      nombre: form.nombre.trim(),
+      apellido: form.apellido.trim(),
+      email: form.email.trim(),
+      puesto: form.puesto.trim(),
+      consulta: form.consulta.trim(),
+    }
+
+    if (!data.nombre || !data.apellido || !data.email || !data.consulta) {
+      setError('Completá los campos obligatorios.')
+      return
+    }
+    if (!EMAIL_RE.test(data.email)) {
+      setError('Ingresá un email válido.')
+      return
+    }
 
     if (!FORMSPREE_ENDPOINT) {
       setError('El formulario no está disponible por el momento. Escribinos por email o WhatsApp y te respondemos a la brevedad.')
@@ -61,7 +88,7 @@ export default function ContactSection() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(data),
       })
       if (res.ok) {
         setSent(true)
@@ -169,11 +196,23 @@ export default function ContactSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              {/* Honeypot anti-bots — invisible para humanos, los bots lo completan */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={form._gotcha}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex flex-col gap-1">
                   <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">Nombre</label>
                   <Input
                     name="nombre"
+                    maxLength={MAX.nombre}
                     placeholder="María"
                     value={form.nombre}
                     onChange={handleChange}
@@ -185,6 +224,7 @@ export default function ContactSection() {
                   <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">Apellido</label>
                   <Input
                     name="apellido"
+                    maxLength={MAX.apellido}
                     placeholder="González"
                     value={form.apellido}
                     onChange={handleChange}
@@ -199,6 +239,7 @@ export default function ContactSection() {
                 <Input
                   type="email"
                   name="email"
+                  maxLength={MAX.email}
                   placeholder="maria@empresa.com"
                   value={form.email}
                   onChange={handleChange}
@@ -211,6 +252,7 @@ export default function ContactSection() {
                 <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">Puesto actual</label>
                 <Input
                   name="puesto"
+                  maxLength={MAX.puesto}
                   placeholder="CEO / Fundador / Gerente…"
                   value={form.puesto}
                   onChange={handleChange}
@@ -222,6 +264,7 @@ export default function ContactSection() {
                 <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">Tu consulta</label>
                 <Textarea
                   name="consulta"
+                  maxLength={MAX.consulta}
                   placeholder="Contanos brevemente tu situación o desafío…"
                   rows={4}
                   value={form.consulta}

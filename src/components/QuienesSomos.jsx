@@ -1,13 +1,5 @@
 import { motion } from 'framer-motion'
-
-const XRaySymbol = () => (
-  <svg viewBox="0 0 120 120" fill="none" className="w-36 h-36 lg:w-52 lg:h-52 opacity-80">
-    <circle cx="60" cy="60" r="56" stroke="#C8922A" strokeWidth="1.5" />
-    <line x1="15" y1="15" x2="105" y2="105" stroke="white" strokeWidth="4" strokeLinecap="round" />
-    <line x1="105" y1="15" x2="15" y2="105" stroke="white" strokeWidth="4" strokeLinecap="round" />
-    <circle cx="60" cy="60" r="7" fill="#C8922A" />
-  </svg>
-)
+import logoXray from '../assets/L X-RAY 200521 2.png'
 
 export default function QuienesSomos() {
   return (
@@ -50,7 +42,7 @@ export default function QuienesSomos() {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <XRaySymbol />
+          <img src={logoXray} alt="X-Ray" className="w-64 lg:w-80 h-auto" />
         </motion.div>
       </div>
     </section>

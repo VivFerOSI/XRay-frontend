@@ -75,7 +75,7 @@ export default function HeroSlider() {
             <line x1="0" y1="100%" x2="100%" y2="0" stroke="#C8922A" strokeWidth="1" />
           </svg>
 
-          <div className="relative z-10 flex items-center min-h-screen">
+          <div className="relative z-10 flex items-center min-h-screen pt-40 pb-28 lg:pt-28 lg:pb-16">
             <div className="max-w-2xl px-8 lg:pl-16">
               <h1 className="font-display font-bold text-white text-4xl lg:text-6xl leading-tight mb-6">
                 {slide.title}

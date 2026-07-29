@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-// URL de QA — Andrés (programador) pidió usar la de pruebas por ahora.
-// Producción: https://jobdescription.x-ray.com.ar/
-const JD_URL = 'https://qa.jobdescription.x-ray.com.ar/'
 
 export default function JobDescription() {
   return (
@@ -44,10 +41,10 @@ export default function JobDescription() {
             asChild
             className="bg-navy-mid text-white hover:bg-gold border-0 rounded-full px-8 py-3 h-auto font-body font-medium text-base gap-2 mt-4"
           >
-            <a href={JD_URL} target="_blank" rel="noopener noreferrer">
-              Acceder a la plataforma
-              <ArrowUpRight size={16} />
-            </a>
+            <Link to="/job-description">
+              Conocer Job Description
+              <ArrowRight size={16} />
+            </Link>
           </Button>
 
           {/*

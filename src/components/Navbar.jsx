@@ -18,7 +18,7 @@ const XRayLogo = () => (
 const navLinks = [
   { label: 'Nosotros', href: '/#quienes-somos' },
   { label: 'Servicios', href: '/servicios' },
-  { label: 'Job Description', href: '/#job-description' },
+  { label: 'Job Description', href: '/job-description' },
 ]
 
 export default function Navbar() {

@@ -5,6 +5,7 @@ import ScrollManager from './components/ScrollManager'
 import Home from './pages/Home'
 import Servicios from './pages/Servicios'
 import Autoevaluacion from './pages/Autoevaluacion'
+import JobDescriptionPage from './pages/JobDescriptionPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
+        <Route path="/job-description" element={<JobDescriptionPage />} />
         <Route path="/autoevaluacion" element={<Autoevaluacion />} />
       </Routes>
       <Footer />
