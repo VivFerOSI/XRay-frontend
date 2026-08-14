@@ -158,7 +158,7 @@ export default function ContactSection() {
 
           <div className="flex gap-3 mt-10">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/xraygenera/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -167,7 +167,7 @@ export default function ContactSection() {
               <InstagramIcon />
             </a>
             <a
-              href="https://x.com"
+              href="https://x.com/XRay_genera"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X / Twitter"

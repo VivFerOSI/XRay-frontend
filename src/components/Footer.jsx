@@ -67,7 +67,7 @@ export default function Footer() {
             </a>
             <div className="flex gap-4 mt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/xraygenera/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/60 hover:text-gold transition-colors duration-200"
@@ -76,7 +76,7 @@ export default function Footer() {
                 <InstagramIcon />
               </a>
               <a
-                href="https://x.com"
+                href="https://x.com/XRay_genera"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/60 hover:text-gold transition-colors duration-200"
@@ -93,7 +93,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="font-body text-white/40 text-xs">
-          © 2026 X-Ray Consultoría Organizacional · Buenos Aires, Argentina
+          © 2026 <span className="text-gold font-semibold">X-Ray</span> Consultoría Organizacional · Buenos Aires, Argentina
         </p>
         <p className="font-body text-white/40 text-xs">
           Eficiencia técnica · Profundidad filosófica

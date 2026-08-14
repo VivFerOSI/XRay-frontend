@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import Servicios from './pages/Servicios'
 import Autoevaluacion from './pages/Autoevaluacion'
 import JobDescriptionPage from './pages/JobDescriptionPage'
+import ComunidadUbuntu from './pages/ComunidadUbuntu'
+import GimnasioLiderazgo from './pages/GimnasioLiderazgo'
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/job-description" element={<JobDescriptionPage />} />
+        <Route path="/comunidad-ubuntu" element={<ComunidadUbuntu />} />
+        <Route path="/gimnasio-liderazgo" element={<GimnasioLiderazgo />} />
         <Route path="/autoevaluacion" element={<Autoevaluacion />} />
       </Routes>
       <Footer />

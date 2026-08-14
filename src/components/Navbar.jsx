@@ -12,13 +12,14 @@ import {
 import logoXray from '../assets/logo-xray-blanco.png'
 
 const XRayLogo = () => (
-  <img src={logoXray} alt="X-Ray" className="h-10 w-auto" />
+  <img src={logoXray} alt="X-Ray" className="h-14 w-auto" />
 )
 
 const navLinks = [
   { label: 'Nosotros', href: '/#quienes-somos' },
   { label: 'Servicios', href: '/servicios' },
   { label: 'Job Description', href: '/job-description' },
+  { label: 'Comunidad Ubuntu', href: '/comunidad-ubuntu' },
 ]
 
 export default function Navbar() {

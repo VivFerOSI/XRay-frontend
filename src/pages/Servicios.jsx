@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ServiceCard from '../components/ServiceCard'
-import GimnasioModal from '../components/GimnasioModal'
 
 import imgAutodiagnostico from '../assets/Dollarphotoclub_80013806 Autod emprendedor.jpg'
 import imgGimnasioMente from '../assets/iStock-978387300.jpg'
@@ -22,8 +20,6 @@ const SectionDivider = ({ label }) => (
 )
 
 export default function Servicios() {
-  const [modalOpen, setModalOpen] = useState(false)
-
   return (
     <main className="bg-navy-deep">
       {/* Page header */}
@@ -52,15 +48,17 @@ export default function Servicios() {
         description='La transición entre el segundo y el quinto año de vida de una empresa es el lapso de mayor vulnerabilidad y, a la vez, de mayor potencial. Este diagnóstico está diseñado para que el fundador se detenga a observar el ecosistema que ha construido. Más allá de las métricas financieras, evaluamos la alineación entre la visión personal, la salud del modelo de negocio y la capacidad de delegar.'
         image={imgAutodiagnostico}
         imageLeft={true}
+        moreHref="/autoevaluacion"
+        moreLabel="Hacer la autoevaluación →"
         index={0}
       />
       <ServiceCard
-        title="El Gimnasio de Mente — Entrenamiento Mental para Alta Demanda Estratégica"
-        description="Así como el cuerpo requiere entrenamiento para rendir al máximo, la mente de un líder necesita un espacio de puesta a punto constante. Desarrollamos las habilidades críticas para el escenario actual: la gestión de la incertidumbre, la toma de decisiones bajo presión y el autodominio. El lugar ideal para profesionales y fundadores que buscan transformar la complejidad del entorno en una ventaja estratégica deliberada."
+        title="Gimnasio de Liderazgo"
+        description="Entrenamiento para emprendedores y líderes que quieren pensar mejor, ejecutar mejor y crecer con menos soledad. Un espacio de entrenamiento, comunidad y destrabe, con planes, células de pares y sesiones de foco para avanzar con más claridad, criterio y menos desgaste."
         image={imgGimnasioMente}
         imageLeft={false}
+        moreHref="/gimnasio-liderazgo"
         index={1}
-        onVerMas={() => setModalOpen(true)}
       />
       <ServiceCard
         title="Gimnasio Emocional"
@@ -105,10 +103,9 @@ export default function Servicios() {
         description='Una jornada vivencial diseñada para la generación Silver donde el arte y la filosofía se fusionan para transformar la perspectiva del porvenir. A través del estoicismo, el epicureísmo y el "Efecto Bruckner", resignificamos el "ahora" como un apasionante recomienzo. Percusión colectiva, creación plástica y espacios de deleite consciente.'
         image={imgArteHabitar}
         imageLeft={false}
+        split
         index={1}
       />
-
-      <GimnasioModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </main>
   )
 }

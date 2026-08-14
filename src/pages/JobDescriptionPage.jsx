@@ -2,13 +2,15 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Check, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import imgConcept from '../assets/iStock-1035193766.jpg'
+import imgTeam from '../assets/iStock-2259679276.jpg'
 
 // WhatsApp — canal de conversión. Mensajes pre-cargados según la versión.
 const WHATSAPP_URL = 'https://wa.me/5491176764601'
 const waLink = (msg) => `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 
 const PROBAR_WA = waLink('Hola, me interesa Job Description y quiero probarlo. ¿Me pasan más información?')
-const CONTRATAR_WA = waLink('Hola, quiero contratar Job Description (versión individual). ¿Me pasan más información?')
+const INDIVIDUAL_WA = waLink('Hola, me interesa Job Description (versión individual). ¿Me pasan más información?')
 const ORG_WA = waLink('Hola, me interesa Job Description para mi organización (versión organizacional). ¿Me pasan más información?')
 
 const idealFor = [
@@ -28,14 +30,6 @@ const idealFor = [
     label: 'Personas que arman su propia descripción de puesto',
     text: 'ya sea para postularse a un empleo, ordenar su rol actual o emprender.',
   },
-]
-
-const pricing = [
-  { qty: '1 descripción y perfil', unit: '$24', total: '$24' },
-  { qty: '5 descripciones y perfiles', unit: '$22 c/u', total: '$110' },
-  { qty: '10 descripciones y perfiles', unit: '$20 c/u', total: '$200' },
-  { qty: '20 descripciones y perfiles', unit: '$18 c/u', total: '$360' },
-  { qty: '50 descripciones y perfiles', unit: '$16 c/u', total: '$800' },
 ]
 
 const orgFeatures = [
@@ -73,7 +67,6 @@ export default function JobDescriptionPage() {
       <section className="relative px-8 pt-40 pb-28">
         <div className="absolute -top-24 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
         <div className="absolute top-1/2 -left-48 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
-        {/* Glow puente hacia la sección siguiente */}
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-160 h-96 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto text-center" {...reveal}>
@@ -81,7 +74,7 @@ export default function JobDescriptionPage() {
           <p className="font-display italic text-gold/90 text-lg lg:text-xl mb-7">
             La forma más simple y profesional de definir cada puesto de trabajo.
           </p>
-          <h1 className="font-display font-bold text-white text-4xl lg:text-5xl leading-tight mb-8 pb-4">
+          <h1 className="font-display font-bold text-white text-4xl lg:text-5xl leading-tight mb-8">
             El software que automatiza y profesionaliza la gestión de puestos.
           </h1>
           <p className="font-body text-white/65 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
@@ -118,41 +111,29 @@ export default function JobDescriptionPage() {
         </motion.div>
       </section>
 
-      {/* ── EL PROBLEMA / LA BIBLIOTECA ── */}
+      {/* ── EL PROBLEMA QUE RESOLVEMOS ── */}
       <section className="relative px-8 py-28">
         <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-40 -left-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
-        <div className="relative max-w-4xl mx-auto grid lg:grid-cols-2 gap-16">
+        <div className="relative max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <motion.div {...reveal}>
             <Eyebrow>El problema que resolvemos</Eyebrow>
-            <h2 className="font-display font-bold text-white text-2xl lg:text-3xl leading-snug mb-6">
+            <h2 className="font-display font-bold text-white text-3xl lg:text-4xl leading-snug mb-6">
               De documentos desordenados a un proceso ordenado de principio a fin.
             </h2>
-            <p className="font-body text-white/65 text-base leading-relaxed">
+            <p className="font-body text-white/65 text-base lg:text-lg leading-relaxed">
               Escribir una buena descripción de puesto lleva tiempo, requiere criterio técnico y suele
               terminar en documentos desordenados, desactualizados o inconsistentes entre sí. Job
-              Description ordena ese proceso: desde la primera descripción individual hasta un programa
-              organizacional con decenas de puestos, usuarios y niveles de autorización.
+              Description ordena ese proceso de principio a fin: desde la primera descripción individual
+              hasta un programa organizacional con decenas de puestos, usuarios y niveles de autorización.
             </p>
           </motion.div>
-
           <motion.div {...reveal}>
-            <Eyebrow>Una biblioteca inteligente, no una hoja en blanco</Eyebrow>
-            <p className="font-body text-white/65 text-base leading-relaxed mb-4">
-              Olvidate de las hojas en blanco y las descripciones desactualizadas. Job Description
-              cuenta con una biblioteca inteligente y precargada, con contenido alineado a normas del
-              mercado (como ISO), KPIs específicos, niveles de supervisión, riesgos laborales y
-              responsabilidades por bienes.
-            </p>
-            <p className="font-body text-white/65 text-base leading-relaxed mb-5">
-              En el Perfil de Puesto vas a encontrar competencias transversales ya definidas, graduadas
-              y ajustadas a comportamientos observables, junto con indicadores de experiencia, formación
-              y más.
-            </p>
-            <p className="font-display italic text-gold/90 text-lg">
-              Vos seleccionás. El sistema automatiza el resto.
-            </p>
+            <img
+              src={imgConcept}
+              alt="Job Description"
+              className="w-full aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
+            />
           </motion.div>
         </div>
       </section>
@@ -172,8 +153,7 @@ export default function JobDescriptionPage() {
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 items-start">
           {/* Individual */}
           <motion.div
-            id="individual"
-            className="scroll-mt-28 rounded-xl border border-white/10 bg-white/3 p-8 lg:p-10"
+            className="rounded-xl border border-white/10 bg-white/3 p-8 lg:p-10 flex flex-col"
             {...reveal}
           >
             <h3 className="font-display font-bold text-white text-2xl mb-2">Job Description Individual</h3>
@@ -200,58 +180,22 @@ export default function JobDescriptionPage() {
               listos para usar, sin necesidad de administrar usuarios ni procesos internos.
             </p>
 
-            <p className="font-body font-semibold text-gold tracking-[0.15em] text-[11px] uppercase mb-4">
-              Comprá según lo que necesites — descuento por volumen
-            </p>
-            <div className="overflow-x-auto rounded-lg border border-white/10 mb-3">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-navy-mid/30">
-                    <th className="font-body text-white/80 text-xs font-semibold px-4 py-3">Cantidad</th>
-                    <th className="font-body text-white/80 text-xs font-semibold px-4 py-3 text-right">Precio/unidad</th>
-                    <th className="font-body text-white/80 text-xs font-semibold px-4 py-3 text-right">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricing.map((row) => (
-                    <tr key={row.qty} className="border-t border-white/8">
-                      <td className="font-body text-white/70 text-sm px-4 py-3">{row.qty}</td>
-                      <td className="font-body text-white/70 text-sm px-4 py-3 text-right">{row.unit}</td>
-                      <td className="font-body text-gold text-sm font-semibold px-4 py-3 text-right">{row.total}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="font-body text-white/40 text-xs leading-relaxed mb-8">
-              Precios en USD (equivalente disponible en pesos argentinos). Vigencia de 12 meses desde la
-              contratación; si comprás de nuevo antes de esa fecha, conservás el saldo anterior.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
+            <div className="mt-auto">
               <Button
                 asChild
                 className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-7 h-11 font-body font-semibold text-sm gap-2"
               >
-                <a href={CONTRATAR_WA} target="_blank" rel="noopener noreferrer">
-                  Contratar ahora
+                <a href={INDIVIDUAL_WA} target="_blank" rel="noopener noreferrer">
+                  Conocer la versión individual
                   <MessageCircle size={15} />
                 </a>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                className="text-white/70 hover:text-gold hover:bg-transparent h-11 px-3 font-body text-sm"
-              >
-                <Link to="/#contacto">Consultar →</Link>
               </Button>
             </div>
           </motion.div>
 
           {/* Organizacional — destacada */}
           <motion.div
-            id="organizacional"
-            className="scroll-mt-28 rounded-xl border border-gold/40 bg-navy-mid/15 p-8 lg:p-10 relative"
+            className="rounded-xl border border-gold/40 bg-navy-mid/15 p-8 lg:p-10 relative flex flex-col"
             {...reveal}
           >
             <span className="absolute top-6 right-6 font-body text-[10px] font-bold tracking-widest text-gold uppercase">
@@ -282,40 +226,55 @@ export default function JobDescriptionPage() {
               consistencia entre puestos y dejar trazabilidad de cada definición.
             </p>
 
-            <p className="font-body font-semibold text-gold tracking-[0.15em] text-[11px] uppercase mb-4">
-              ¿Quién carga los datos iniciales? Vos elegís
-            </p>
-            <div className="flex flex-col gap-4 mb-8">
-              <div className="rounded-lg bg-white/3 border border-white/8 px-5 py-4">
-                <p className="font-body font-semibold text-white text-sm mb-1">Autogestionado</p>
-                <p className="font-body text-white/60 text-sm leading-relaxed">
-                  Cargás usuarios, supervisores, emails y plazos en pantallas predefinidas e intuitivas.
-                </p>
-              </div>
-              <div className="rounded-lg bg-white/3 border border-white/8 px-5 py-4">
-                <p className="font-body font-semibold text-white text-sm mb-1">Asistido</p>
-                <p className="font-body text-white/60 text-sm leading-relaxed">
-                  Nos enviás los datos en Excel y nuestro equipo se encarga de la carga y la puesta en marcha.
-                </p>
-              </div>
+            <div className="mt-auto">
+              <Button
+                asChild
+                className="bg-white/10 text-white border border-white/30 hover:bg-gold hover:border-gold rounded-full px-7 h-11 font-body font-medium text-sm gap-2 backdrop-blur-sm"
+              >
+                <a href={ORG_WA} target="_blank" rel="noopener noreferrer">
+                  Conocer la versión organizacional
+                  <MessageCircle size={15} />
+                </a>
+              </Button>
             </div>
+          </motion.div>
+        </div>
+      </section>
 
-            <Button
-              asChild
-              className="bg-white/10 text-white border border-white/30 hover:bg-gold hover:border-gold rounded-full px-7 h-11 font-body font-medium text-sm gap-2 backdrop-blur-sm"
-            >
-              <a href={ORG_WA} target="_blank" rel="noopener noreferrer">
-                Conocer la versión organizacional
-                <MessageCircle size={15} />
-              </a>
-            </Button>
+      {/* ── UNA BIBLIOTECA INTELIGENTE ── */}
+      <section className="relative px-8 py-28">
+        <div className="absolute -bottom-40 -left-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div className="lg:order-2" {...reveal}>
+            <Eyebrow>Una biblioteca inteligente, no una hoja en blanco</Eyebrow>
+            <p className="font-body text-white/65 text-base lg:text-lg leading-relaxed mb-5">
+              Olvidate de las hojas en blanco y las descripciones desactualizadas. Job Description cuenta
+              con una biblioteca inteligente y precargada, con contenido alineado a normas del mercado
+              (como ISO), KPIs específicos, niveles de supervisión, riesgos laborales y responsabilidades
+              por bienes.
+            </p>
+            <p className="font-body text-white/65 text-base lg:text-lg leading-relaxed mb-6">
+              En el Perfil de Puesto vas a encontrar competencias transversales ya definidas, graduadas y
+              ajustadas a comportamientos observables, junto con indicadores de experiencia, formación y más.
+            </p>
+            <p className="font-display italic text-gold/90 text-xl lg:text-2xl">
+              Vos seleccionás. El sistema automatiza el resto.
+            </p>
+          </motion.div>
+          <motion.div className="lg:order-1" {...reveal}>
+            <img
+              src={imgTeam}
+              alt="Equipo trabajando con Job Description"
+              className="w-full aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
+            />
           </motion.div>
         </div>
       </section>
 
       {/* ── POR QUÉ ── */}
       <section className="relative px-8 py-28">
-        <div className="absolute -top-32 -left-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto" {...reveal}>
           <Eyebrow>¿Por qué Job Description?</Eyebrow>
@@ -348,7 +307,7 @@ export default function JobDescriptionPage() {
               asChild
               className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
             >
-              <a href={CONTRATAR_WA} target="_blank" rel="noopener noreferrer">
+              <a href={INDIVIDUAL_WA} target="_blank" rel="noopener noreferrer">
                 Contratación individual
                 <MessageCircle size={16} />
               </a>

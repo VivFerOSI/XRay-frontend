@@ -31,7 +31,7 @@ export default function QuienesSomos() {
             Eficiencia técnica con profundidad filosófica
           </h2>
           <p className="font-body text-white/65 text-lg leading-relaxed max-w-xl">
-            X-Ray es una consultora organizacional que combina eficiencia técnica con profundidad filosófica. Acompañamos a líderes, fundadores y equipos en los momentos que más importan: cuando el crecimiento exige un salto de consciencia.
+            <span className="text-gold font-semibold">X-Ray</span> es una consultora organizacional que combina eficiencia técnica con profundidad filosófica. Acompañamos a líderes, fundadores y equipos en los momentos que más importan: cuando el crecimiento exige un salto de consciencia.
           </p>
         </motion.div>
 

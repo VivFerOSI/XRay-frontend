@@ -75,7 +75,7 @@ export default function HeroSlider() {
             <line x1="0" y1="100%" x2="100%" y2="0" stroke="#C8922A" strokeWidth="1" />
           </svg>
 
-          <div className="relative z-10 flex items-center min-h-screen pt-40 pb-28 lg:pt-28 lg:pb-16">
+          <div className="relative z-10 flex items-center min-h-screen pt-52 pb-24 lg:pt-44 lg:pb-20">
             <div className="max-w-2xl px-8 lg:pl-16">
               <h1 className="font-display font-bold text-white text-4xl lg:text-6xl leading-tight mb-6">
                 {slide.title}
@@ -100,7 +100,7 @@ export default function HeroSlider() {
 
       {/* Frase institucional fija — persiste en todos los slides */}
       <div className="absolute top-24 lg:top-28 left-0 right-0 z-30 px-8 lg:pl-16 pointer-events-none">
-        <p className="font-display italic text-gold text-lg lg:text-2xl leading-snug max-w-lg">
+        <p className="font-display italic text-gold text-base lg:text-xl leading-snug max-w-3xl">
           Diseño organizacional con sentido, rigurosidad y disfrute.
         </p>
       </div>
