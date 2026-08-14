@@ -8,7 +8,7 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion'
 import imgManos from '../assets/iStock-457074035 Manos entrelazadas.jpg'
-import imgNube from '../assets/iStock- Nube Ubu Blue.png'
+import imgNube from '../assets/nube-ubuntu.png'
 import imgRoi from '../assets/iStock-2245441541 ROI.jpg'
 
 // WhatsApp — canal de conversión.
@@ -160,7 +160,7 @@ export default function ComunidadUbuntu() {
             <img
               src={imgNube}
               alt="Valores de Comunidad Ubuntu"
-              className="w-full aspect-video object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
+              className="w-full aspect-3/2 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
             />
           </motion.div>
         </div>
