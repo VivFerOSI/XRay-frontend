@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion'
+import FadedImage from '../components/FadedImage'
 import imgManos from '../assets/iStock-457074035 Manos entrelazadas.jpg'
 import imgNube from '../assets/nube-ubuntu.png'
 import imgRoi from '../assets/iStock-2245441541 ROI.jpg'
@@ -75,7 +76,7 @@ const faqs = [
 ]
 
 const Eyebrow = ({ children }) => (
-  <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-4">
+  <p className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-4">
     {children}
   </p>
 )
@@ -91,7 +92,7 @@ export default function ComunidadUbuntu() {
   return (
     <main className="relative bg-navy-deep overflow-hidden">
       {/* ── HERO ── */}
-      <section className="relative px-8 pt-40 pb-28">
+      <section className="relative px-8 pt-40 pb-16">
         <div className="absolute -top-24 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-160 h-96 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
@@ -118,17 +119,13 @@ export default function ComunidadUbuntu() {
           </motion.div>
 
           <motion.div {...reveal}>
-            <img
-              src={imgManos}
-              alt="Manos entrelazadas — comunidad"
-              className="w-full aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
-            />
+            <FadedImage src={imgManos} alt="Manos entrelazadas — comunidad" className="w-full aspect-4/3" />
           </motion.div>
         </div>
       </section>
 
       {/* ── QUÉ ES UBUNTU ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -left-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
@@ -157,17 +154,13 @@ export default function ComunidadUbuntu() {
           </motion.div>
 
           <motion.div className="lg:order-1" {...reveal}>
-            <img
-              src={imgNube}
-              alt="Valores de Comunidad Ubuntu"
-              className="w-full aspect-3/2 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
-            />
+            <FadedImage src={imgNube} alt="Valores de Comunidad Ubuntu" className="w-full aspect-3/2" />
           </motion.div>
         </div>
       </section>
 
       {/* ── EL DESAFÍO ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-3xl mx-auto text-center" {...reveal}>
           <Eyebrow>El desafío actual</Eyebrow>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl leading-snug mb-6">
@@ -183,7 +176,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── LA PROPUESTA ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-160 h-80 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto text-center mb-14" {...reveal}>
@@ -205,8 +198,8 @@ export default function ComunidadUbuntu() {
               className="rounded-xl border border-white/10 bg-white/3 p-8"
               {...reveal}
             >
-              <div className="w-9 h-9 rounded-full bg-navy-mid/40 flex items-center justify-center mb-5">
-                <span className="font-display font-bold text-gold">{i + 1}</span>
+              <div className="w-12 h-12 rounded-full bg-navy-mid/40 flex items-center justify-center mb-5">
+                <span className="font-display font-bold text-gold text-3xl leading-none -translate-y-0.5">{i + 1}</span>
               </div>
               <p className="font-body text-white/75 text-sm leading-relaxed">{d}</p>
             </motion.div>
@@ -215,7 +208,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── QUÉ INCLUYE ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -bottom-40 -left-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto grid lg:grid-cols-2 gap-14">
@@ -253,7 +246,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── BENEFICIOS ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-5xl mx-auto text-center mb-14" {...reveal}>
           <Eyebrow>Beneficios</Eyebrow>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl">
@@ -289,7 +282,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── CÓMO SE MIDE ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-14 items-center">
@@ -320,17 +313,13 @@ export default function ComunidadUbuntu() {
           </motion.div>
 
           <motion.div {...reveal}>
-            <img
-              src={imgRoi}
-              alt="Retorno e impacto"
-              className="w-full max-w-xs mx-auto aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-xl"
-            />
+            <FadedImage src={imgRoi} alt="Retorno e impacto" className="w-full max-w-xs mx-auto aspect-4/3" />
           </motion.div>
         </div>
       </section>
 
       {/* ── QUÉ LO HACE DIFERENTE ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-3xl mx-auto text-center" {...reveal}>
           <Eyebrow>Qué hace diferente a este programa</Eyebrow>
           <p className="font-display italic text-white/80 text-2xl lg:text-3xl leading-snug mb-6">
@@ -345,7 +334,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-3xl mx-auto" {...reveal}>
           <Eyebrow>Preguntas frecuentes</Eyebrow>
           <Accordion type="single" collapsible className="mt-4 border-t border-white/10">
@@ -364,7 +353,7 @@ export default function ComunidadUbuntu() {
       </section>
 
       {/* ── CIERRE / CTA ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-160 h-80 rounded-full bg-navy-mid/25 blur-3xl pointer-events-none" />
         <motion.div className="relative max-w-2xl mx-auto text-center" {...reveal}>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-6">

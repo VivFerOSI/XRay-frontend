@@ -116,7 +116,7 @@ export default function ContactSection() {
           transition={{ duration: 0.65 }}
           viewport={{ once: true }}
         >
-          <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-4">
+          <p className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-4">
             Contacto
           </p>
           <h2 className="font-display font-bold text-white text-4xl leading-snug mb-3">

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Check, MessageCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowLeft, Check, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -27,10 +28,10 @@ const painPoints = [
 
 const steps = [
   { t: 'Empezás con un diagnóstico', d: 'Hacés el Stress Test de Robustez y Crecimiento, un autodiagnóstico simple que te ayuda a entender dónde estás parado, qué está funcionando y qué necesita atención.' },
-  { t: 'Recibís una orientación', d: 'Según tu momento, te sugerimos la ruta más adecuada para tu situación actual.' },
+  { t: 'Recibís una orientación', d: 'Según tu momento, te sugerimos la ruta más adecuada para tu momento actual.' },
   { t: 'Entrás al nivel que mejor te encaja', d: 'Podés sumarte a Base, Impulso o Aceleración, según el tipo de acompañamiento que necesites.' },
-  { t: 'Compartís con pares', d: 'Trabajás en células cerradas con personas que atraviesan desafíos parecidos. Eso hace que la conversación sea más útil, honesta y transformadora.' },
-  { t: 'Accedés a destrabe cuando hace falta', d: 'Si aparece una decisión importante o un problema que no querés seguir pateando, podés sumar una sesión premium de foco para resolverlo con claridad.' },
+  { t: 'Compartís con pares', d: 'Trabajás en células cerradas con personas que atraviesan desafíos parecidos. Eso hace que la conversación sea más útil, más honesta y más transformadora.' },
+  { t: 'Accedés a destrabe cuando hace falta', d: 'Si aparece una decisión importante o un problema que no querés seguir pateando, podés sumar una sesión premium de foco para resolverlo con claridad y avanzar.' },
 ]
 
 const takeaways = [
@@ -95,7 +96,7 @@ const faqs = [
 ]
 
 const Eyebrow = ({ children }) => (
-  <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-4">
+  <p className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-4">
     {children}
   </p>
 )
@@ -111,25 +112,19 @@ export default function GimnasioLiderazgo() {
   return (
     <main className="relative bg-navy-deep overflow-hidden">
       {/* ── HERO ── */}
-      <section className="relative px-8 pt-40 pb-28">
+      <section className="relative px-8 pt-40 pb-16">
         <div className="absolute -top-24 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-160 h-96 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
           <motion.div {...reveal}>
+            <Link to="/servicios" className="inline-flex items-center gap-2 text-white/60 hover:text-gold text-sm font-body mb-6">
+              <ArrowLeft size={16} /> Volver a Servicios
+            </Link>
             <Eyebrow>Gimnasio de Liderazgo</Eyebrow>
-            <h1 className="font-display font-bold text-white text-4xl lg:text-5xl leading-tight mb-6">
-              Pensá mejor, ejecutá mejor y crecé con menos soledad.
+            <h1 className="font-display font-bold text-white text-3xl lg:text-4xl leading-tight mb-8">
+              Entrenamiento para emprendedores y líderes que quieren pensar mejor, ejecutar mejor y crecer con menos soledad.
             </h1>
-            <p className="font-body text-white/65 text-lg leading-relaxed mb-6">
-              Entrenamiento para emprendedores y líderes. Hay momentos en los que liderar se siente más
-              pesado de lo que imaginabas: muchas decisiones encima, demasiadas cosas abiertas y, aunque
-              avances, te falta orden, foco y alguien con quien pensar mejor.
-            </p>
-            <p className="font-body text-white/65 text-base leading-relaxed mb-10">
-              Gimnasio de Liderazgo es un espacio de <span className="text-white font-medium">entrenamiento,
-              comunidad y destrabe</span> para crecer con más claridad, más criterio y menos desgaste.
-            </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 asChild
@@ -161,7 +156,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── SI TE PASA ESTO ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -left-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto" {...reveal}>
@@ -182,7 +177,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── CÓMO FUNCIONA ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -bottom-40 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-5xl mx-auto mb-14" {...reveal}>
@@ -195,8 +190,8 @@ export default function GimnasioLiderazgo() {
         <div className="relative max-w-4xl mx-auto flex flex-col gap-5">
           {steps.map((s, i) => (
             <motion.div key={s.t} className="flex gap-5 items-start" {...reveal}>
-              <div className="w-10 h-10 rounded-full bg-navy-mid/40 flex items-center justify-center shrink-0">
-                <span className="font-display font-bold text-gold">{i + 1}</span>
+              <div className="w-12 h-12 rounded-full bg-navy-mid/40 flex items-center justify-center shrink-0">
+                <span className="font-display font-bold text-gold text-3xl leading-none -translate-y-0.5">{i + 1}</span>
               </div>
               <div>
                 <p className="font-body font-semibold text-white text-base mb-1">{s.t}</p>
@@ -208,7 +203,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── QUÉ TE LLEVÁS ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-5xl mx-auto" {...reveal}>
           <Eyebrow>Qué te llevás</Eyebrow>
           <div className="grid sm:grid-cols-2 gap-4 mt-4">
@@ -223,7 +218,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── LOS PLANES ── */}
-      <section id="planes" className="relative px-8 py-28 scroll-mt-24">
+      <section id="planes" className="relative px-8 py-12 scroll-mt-24">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-160 h-80 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-5xl mx-auto text-center mb-16" {...reveal}>
@@ -289,7 +284,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── EL DIAGNÓSTICO ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -bottom-40 -left-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/3 p-8 lg:p-12" {...reveal}>
@@ -322,7 +317,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── CÉLULAS DE TRACCIÓN ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-5xl mx-auto mb-14" {...reveal}>
           <Eyebrow>Células de Tracción</Eyebrow>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-5">
@@ -346,7 +341,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── SESIÓN DE DESTRABE ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto text-center" {...reveal}>
@@ -373,7 +368,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── LO QUE HACE DISTINTO ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-3xl mx-auto text-center" {...reveal}>
           <Eyebrow>Lo que hace distinto a este espacio</Eyebrow>
           <p className="font-body text-white/60 text-base leading-relaxed mb-6">
@@ -388,7 +383,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <motion.div className="relative max-w-3xl mx-auto" {...reveal}>
           <Eyebrow>Preguntas frecuentes</Eyebrow>
           <Accordion type="single" collapsible className="mt-4 border-t border-white/10">
@@ -407,7 +402,7 @@ export default function GimnasioLiderazgo() {
       </section>
 
       {/* ── CIERRE / CTA ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-160 h-80 rounded-full bg-navy-mid/25 blur-3xl pointer-events-none" />
         <motion.div className="relative max-w-2xl mx-auto text-center" {...reveal}>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-6">

@@ -13,7 +13,7 @@ import imgArteHabitar from '../assets/iStock-979946330.jpg'
 const SectionDivider = ({ label }) => (
   <div className="flex items-center gap-5 px-10 lg:px-16 py-6 bg-navy-deep">
     <div className="w-4 h-px bg-gold shrink-0" />
-    <span className="font-body font-semibold text-gold/80 tracking-[0.22em] text-[10px] uppercase">
+    <span className="font-body font-bold text-gold/80 tracking-[0.18em] text-sm uppercase">
       {label}
     </span>
   </div>
@@ -48,16 +48,22 @@ export default function Servicios() {
         description='La transición entre el segundo y el quinto año de vida de una empresa es el lapso de mayor vulnerabilidad y, a la vez, de mayor potencial. Este diagnóstico está diseñado para que el fundador se detenga a observar el ecosistema que ha construido. Más allá de las métricas financieras, evaluamos la alineación entre la visión personal, la salud del modelo de negocio y la capacidad de delegar.'
         image={imgAutodiagnostico}
         imageLeft={true}
-        moreHref="/autoevaluacion"
-        moreLabel="Hacer la autoevaluación →"
+        comingSoon="Autoevaluación · Próximamente"
         index={0}
       />
       <ServiceCard
         title="Gimnasio de Liderazgo"
-        description="Entrenamiento para emprendedores y líderes que quieren pensar mejor, ejecutar mejor y crecer con menos soledad. Un espacio de entrenamiento, comunidad y destrabe, con planes, células de pares y sesiones de foco para avanzar con más claridad, criterio y menos desgaste."
+        description={[
+          'Entrenamiento para emprendedores y líderes que quieren pensar mejor, ejecutar mejor y crecer con menos soledad.',
+          'Hay momentos en los que liderar se siente más pesado de lo que imaginabas.',
+          'Tenés muchas decisiones encima, demasiadas cosas abiertas al mismo tiempo y, aunque sigas avanzando, sentís que te falta orden, foco y alguien con quien pensar mejor.',
+          'Gimnasio de Liderazgo nace para acompañarte en ese punto.',
+          'Es un espacio de entrenamiento, comunidad y destrabe para emprendedores y líderes que quieren crecer con más claridad, más criterio y menos desgaste.',
+        ]}
         image={imgGimnasioMente}
         imageLeft={false}
         moreHref="/gimnasio-liderazgo"
+        autoHeight
         index={1}
       />
       <ServiceCard

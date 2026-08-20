@@ -77,7 +77,7 @@ export default function Valores() {
 
                 <div className="p-8">
                   <div className="w-8 h-px bg-gold mb-6" />
-                  <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-2">
+                  <p className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-2">
                     {v.title}
                   </p>
                   <p className="font-body text-white/80 text-sm mb-4">

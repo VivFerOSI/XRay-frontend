@@ -14,6 +14,7 @@ export default function ServiceCard({
   moreLabel = 'Ver información →',
   comingSoon,
   split = false,
+  autoHeight = false,
   index = 0,
 }) {
   // panelLeft=true  → panel de texto a la izquierda, foto a la derecha
@@ -33,9 +34,15 @@ export default function ServiceCard({
       <h2 className="font-display font-bold text-white text-2xl lg:text-[1.75rem] leading-snug mb-4">
         {title}
       </h2>
-      <p className="font-body text-white/70 text-[15px] leading-relaxed mb-8 max-w-md">
-        {description}
-      </p>
+      {Array.isArray(description) ? (
+        <div className="flex flex-col gap-1 mb-8 max-w-md">
+          {description.map((para, i) => (
+            <p key={i} className="font-body text-white/70 text-[15px] leading-relaxed">{para}</p>
+          ))}
+        </div>
+      ) : (
+        <p className="font-body text-white/70 text-[15px] leading-relaxed mb-8 max-w-md">{description}</p>
+      )}
       <div className="flex flex-wrap gap-3">
         <Button
           asChild
@@ -81,9 +88,9 @@ export default function ServiceCard({
     return (
       <motion.div className="relative flex flex-col lg:flex-row bg-navy-deep overflow-hidden" {...anim}>
         <div
-          className={`relative h-72 sm:h-96 lg:h-160 lg:w-1/2 overflow-hidden ${
-            panelLeft ? 'lg:order-2' : 'lg:order-1'
-          }`}
+          className={`relative h-72 sm:h-96 lg:w-1/2 overflow-hidden ${
+            autoHeight ? 'lg:h-auto lg:self-stretch' : 'lg:h-160'
+          } ${panelLeft ? 'lg:order-2' : 'lg:order-1'}`}
         >
           {image ? (
             <img src={image} alt={title} className="w-full h-full object-cover" />

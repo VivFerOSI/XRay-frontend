@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { Check, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import FadedImage from '../components/FadedImage'
 import imgConcept from '../assets/iStock-1035193766.jpg'
 import imgTeam from '../assets/iStock-2259679276.jpg'
 
@@ -10,6 +10,7 @@ const WHATSAPP_URL = 'https://wa.me/5491176764601'
 const waLink = (msg) => `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 
 const PROBAR_WA = waLink('Hola, me interesa Job Description y quiero probarlo. ¿Me pasan más información?')
+const DEMO_WA = waLink('Hola, quiero agendar una demostración de Job Description.')
 const INDIVIDUAL_WA = waLink('Hola, me interesa Job Description (versión individual). ¿Me pasan más información?')
 const ORG_WA = waLink('Hola, me interesa Job Description para mi organización (versión organizacional). ¿Me pasan más información?')
 
@@ -48,7 +49,7 @@ const reasons = [
 ]
 
 const Eyebrow = ({ children }) => (
-  <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-4">
+  <p className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-4">
     {children}
   </p>
 )
@@ -64,7 +65,7 @@ export default function JobDescriptionPage() {
   return (
     <main className="relative bg-navy-deep overflow-hidden">
       {/* ── HERO ── */}
-      <section className="relative px-8 pt-40 pb-28">
+      <section className="relative px-8 pt-40 pb-16">
         <div className="absolute -top-24 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
         <div className="absolute top-1/2 -left-48 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-160 h-96 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
@@ -96,9 +97,12 @@ export default function JobDescriptionPage() {
             <Button
               asChild
               variant="outline"
-              className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm"
+              className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
             >
-              <Link to="/#contacto">Agendar demostración</Link>
+              <a href={DEMO_WA} target="_blank" rel="noopener noreferrer">
+                Agendar demostración
+                <MessageCircle size={16} />
+              </a>
             </Button>
           </div>
 
@@ -112,7 +116,7 @@ export default function JobDescriptionPage() {
       </section>
 
       {/* ── EL PROBLEMA QUE RESOLVEMOS ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -129,17 +133,13 @@ export default function JobDescriptionPage() {
             </p>
           </motion.div>
           <motion.div {...reveal}>
-            <img
-              src={imgConcept}
-              alt="Job Description"
-              className="w-full aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
-            />
+            <FadedImage src={imgConcept} alt="Job Description" className="w-full aspect-4/3" />
           </motion.div>
         </div>
       </section>
 
       {/* ── DOS VERSIONES ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-160 h-80 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 -right-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
@@ -242,7 +242,7 @@ export default function JobDescriptionPage() {
       </section>
 
       {/* ── UNA BIBLIOTECA INTELIGENTE ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -bottom-40 -left-40 w-120 h-120 rounded-full bg-navy-mid/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -263,17 +263,13 @@ export default function JobDescriptionPage() {
             </p>
           </motion.div>
           <motion.div className="lg:order-1" {...reveal}>
-            <img
-              src={imgTeam}
-              alt="Equipo trabajando con Job Description"
-              className="w-full aspect-4/3 object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/30"
-            />
+            <FadedImage src={imgTeam} alt="Equipo trabajando con Job Description" className="w-full aspect-4/3" />
           </motion.div>
         </div>
       </section>
 
       {/* ── POR QUÉ ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute -top-32 -right-40 w-120 h-120 rounded-full bg-navy-mid/15 blur-3xl pointer-events-none" />
 
         <motion.div className="relative max-w-3xl mx-auto" {...reveal}>
@@ -292,7 +288,7 @@ export default function JobDescriptionPage() {
       </section>
 
       {/* ── CIERRE / CTA ── */}
-      <section className="relative px-8 py-28">
+      <section className="relative px-8 py-12">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-160 h-80 rounded-full bg-navy-mid/25 blur-3xl pointer-events-none" />
         <motion.div className="relative max-w-2xl mx-auto text-center" {...reveal}>
           <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-6">

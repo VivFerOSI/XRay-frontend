@@ -12,7 +12,7 @@ export default function JobDescription() {
 
       <div className="relative max-w-3xl mx-auto text-center">
         <motion.p
-          className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-6"
+          className="font-body font-bold text-gold tracking-[0.15em] text-base uppercase mb-6"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

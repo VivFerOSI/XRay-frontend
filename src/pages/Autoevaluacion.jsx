@@ -47,6 +47,11 @@ export default function Autoevaluacion() {
       })
   }, [])
 
+  // Al cambiar de paso o bloque, subir al inicio del formulario.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [phase, pilarStep])
+
   const pilares = content?.pilares ?? []
   const currentPilar = pilares[pilarStep]
 
