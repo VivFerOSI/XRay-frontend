@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Check, MessageCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Check, Mail, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -13,7 +14,7 @@ import imgNube from '../assets/nube-ubuntu.png'
 import imgRoi from '../assets/iStock-2245441541 ROI.jpg'
 
 // WhatsApp — canal de conversión.
-const WHATSAPP_URL = 'https://wa.me/5491176764601'
+const WHATSAPP_URL = 'https://wa.me/5491176766932'
 const waLink = (msg) => `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 const EXPLORACION_WA = waLink('Hola, quiero solicitar una reunión de exploración por el programa Comunidad Ubuntu.')
 const CONOCER_WA = waLink('Hola, quiero conocer el programa Comunidad Ubuntu. ¿Me pasan más información?')
@@ -107,15 +108,27 @@ export default function ComunidadUbuntu() {
               desgaste en cohesión, resiliencia colectiva y propósito compartido en empresas de
               tecnología y salud.
             </p>
-            <Button
-              asChild
-              className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
-            >
-              <a href={EXPLORACION_WA} target="_blank" rel="noopener noreferrer">
-                Solicitar una reunión de exploración
-                <MessageCircle size={16} />
-              </a>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                asChild
+                className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
+              >
+                <a href={EXPLORACION_WA} target="_blank" rel="noopener noreferrer">
+                  Solicitar reunión
+                  <MessageCircle size={16} />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
+              >
+                <Link to="/#contacto">
+                  Escribinos
+                  <Mail size={16} />
+                </Link>
+              </Button>
+            </div>
           </motion.div>
 
           <motion.div {...reveal}>
@@ -363,15 +376,27 @@ export default function ComunidadUbuntu() {
             Nosotros nos encargamos del diseño, la facilitación y la medición. Al finalizar los 3 meses
             revisamos resultados concretos para evaluar continuidad o escalamiento.
           </p>
-          <Button
-            asChild
-            className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
-          >
-            <a href={CONOCER_WA} target="_blank" rel="noopener noreferrer">
-              Quiero conocer el programa
-              <MessageCircle size={16} />
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              asChild
+              className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
+            >
+              <a href={CONOCER_WA} target="_blank" rel="noopener noreferrer">
+                Quiero conocer el programa
+                <MessageCircle size={16} />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
+            >
+              <Link to="/#contacto">
+                Escribinos
+                <Mail size={16} />
+              </Link>
+            </Button>
+          </div>
         </motion.div>
       </section>
     </main>

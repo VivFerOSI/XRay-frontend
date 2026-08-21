@@ -50,20 +50,20 @@ export default function Footer() {
           <p className="font-body font-bold text-gold tracking-widest text-xs mb-5">CONTACTO</p>
           <div className="flex flex-col gap-3">
             <a
-              href="mailto:servicios@x-ray.ar"
+              href="mailto:servicios1@x-ray.ar"
               className="flex items-center gap-2 font-body text-white/70 hover:text-gold transition-colors duration-200 text-sm"
             >
               <Mail size={14} />
-              servicios@x-ray.ar
+              servicios1@x-ray.ar
             </a>
             <a
-              href="https://wa.me/5491176764601"
+              href="https://wa.me/5491176766932"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 font-body text-white/70 hover:text-gold transition-colors duration-200 text-sm"
             >
               <Phone size={14} />
-              +54 11 7676 4601
+              +54 11 7676 6932
             </a>
             <div className="flex gap-4 mt-2">
               <a

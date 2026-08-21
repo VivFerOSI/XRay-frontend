@@ -84,7 +84,7 @@ export default function Servicios() {
       {/* ── PARA EQUIPOS ── */}
       <SectionDivider label="Para equipos" />
 
-      <div id="equipos">
+      <div id="equipos" className="scroll-mt-28">
         <ServiceCard
           title="Potenciamos el Rendimiento Colectivo desde la Estrategia y la Vivencia"
           description='Aunque no siempre se ven, todos tenemos "palancas" y "barreras". A través de nuestros procesos de Team Development ofrecemos un verdadero Colisionador de Hadrones organizacional para movilizar las partículas fundamentales que llevan a un Equipo al siguiente nivel. Incluye fortalecimiento del equipo, reconocimiento del efecto contexto (presencial, híbrido, dispersión geográfica) y offsites de alto impacto: Arte colectivo, Haka, Aikido Training, Percusión orquestal.'

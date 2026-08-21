@@ -105,7 +105,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contacto" className="bg-navy-deep">
+    <section id="contacto" className="bg-navy-deep scroll-mt-28">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-0">
 
         {/* Left: info */}
@@ -128,7 +128,7 @@ export default function ContactSection() {
 
           <div className="flex flex-col gap-6">
             <a
-              href="mailto:servicios@x-ray.ar"
+              href="mailto:servicios1@x-ray.ar"
               className="group flex items-center gap-4 text-white/70 hover:text-white transition-colors duration-200"
             >
               <span className="w-10 h-10 rounded-full border border-white/15 group-hover:border-gold flex items-center justify-center transition-colors duration-200 shrink-0">
@@ -136,12 +136,12 @@ export default function ContactSection() {
               </span>
               <div>
                 <p className="font-body text-[11px] text-white/40 tracking-widest uppercase mb-0.5">Email</p>
-                <p className="font-body text-sm font-medium">servicios@x-ray.ar</p>
+                <p className="font-body text-sm font-medium">servicios1@x-ray.ar</p>
               </div>
             </a>
 
             <a
-              href="https://wa.me/5491176764601"
+              href="https://wa.me/5491176766932"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 text-white/70 hover:text-white transition-colors duration-200"
@@ -151,7 +151,7 @@ export default function ContactSection() {
               </span>
               <div>
                 <p className="font-body text-[11px] text-white/40 tracking-widest uppercase mb-0.5">WhatsApp</p>
-                <p className="font-body text-sm font-medium">+54 11 7676 4601</p>
+                <p className="font-body text-sm font-medium">+54 11 7676 6932</p>
               </div>
             </a>
           </div>

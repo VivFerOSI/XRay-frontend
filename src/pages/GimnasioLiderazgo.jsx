@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Check, MessageCircle } from 'lucide-react'
+import { ArrowLeft, Check, Mail, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import imgJovenes from '../assets/iStock-684820804 Jóvenes trabajando.jpg'
 
 // WhatsApp — canal de conversión.
-const WHATSAPP_URL = 'https://wa.me/5491176764601'
+const WHATSAPP_URL = 'https://wa.me/5491176766932'
 const waLink = (msg) => `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 const DIAGNOSTICO_WA = waLink('Hola, quiero hacer el diagnóstico (Stress Test) del Gimnasio de Liderazgo.')
 const DESTRABE_WA = waLink('Hola, quiero reservar una sesión de destrabe del Gimnasio de Liderazgo.')
@@ -412,15 +412,27 @@ export default function GimnasioLiderazgo() {
             Si sentís que tu negocio o tu proyecto pueden dar más, pero hoy te falta estructura, compañía
             o criterio para avanzar, este puede ser tu próximo paso.
           </p>
-          <Button
-            asChild
-            className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
-          >
-            <a href={ENTRAR_WA} target="_blank" rel="noopener noreferrer">
-              Quiero entrar al Gimnasio de Liderazgo
-              <MessageCircle size={16} />
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              asChild
+              className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
+            >
+              <a href={ENTRAR_WA} target="_blank" rel="noopener noreferrer">
+                Quiero entrar al Gimnasio de Liderazgo
+                <MessageCircle size={16} />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
+            >
+              <Link to="/#contacto">
+                Escribinos
+                <Mail size={16} />
+              </Link>
+            </Button>
+          </div>
         </motion.div>
       </section>
     </main>

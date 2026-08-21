@@ -3,7 +3,7 @@ import logoXray from '../assets/L X-RAY 200521 2.png'
 
 export default function QuienesSomos() {
   return (
-    <section id="quienes-somos" className="relative py-28 px-8">
+    <section id="quienes-somos" className="relative py-28 px-8 scroll-mt-28">
       {/* Subtle top gradient — continues from hero fade */}
       <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-black/30 to-transparent pointer-events-none" />
 

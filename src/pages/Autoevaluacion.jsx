@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import PilarRadar from '@/components/PilarRadar'
 import { stressTestApi } from '@/lib/stressTestApi'
 
-const WHATSAPP = 'https://wa.me/5491176764601'
+const WHATSAPP = 'https://wa.me/5491176766932'
 
 // Color del "semáforo" según el puntaje del pilar (5–25).
 function bandColor(score) {

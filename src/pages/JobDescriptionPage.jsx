@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion'
-import { Check, MessageCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Check, Mail, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import FadedImage from '../components/FadedImage'
 import imgConcept from '../assets/iStock-1035193766.jpg'
 import imgTeam from '../assets/iStock-2259679276.jpg'
 
 // WhatsApp — canal de conversión. Mensajes pre-cargados según la versión.
-const WHATSAPP_URL = 'https://wa.me/5491176764601'
+const WHATSAPP_URL = 'https://wa.me/5491176766932'
 const waLink = (msg) => `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 
 const PROBAR_WA = waLink('Hola, me interesa Job Description y quiero probarlo. ¿Me pasan más información?')
-const DEMO_WA = waLink('Hola, quiero agendar una demostración de Job Description.')
 const INDIVIDUAL_WA = waLink('Hola, me interesa Job Description (versión individual). ¿Me pasan más información?')
 const ORG_WA = waLink('Hola, me interesa Job Description para mi organización (versión organizacional). ¿Me pasan más información?')
 
@@ -99,10 +99,10 @@ export default function JobDescriptionPage() {
               variant="outline"
               className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
             >
-              <a href={DEMO_WA} target="_blank" rel="noopener noreferrer">
+              <Link to="/#contacto">
                 Agendar demostración
-                <MessageCircle size={16} />
-              </a>
+                <Mail size={16} />
+              </Link>
             </Button>
           </div>
 
@@ -313,10 +313,10 @@ export default function JobDescriptionPage() {
               variant="outline"
               className="rounded-full border-gold bg-transparent text-white hover:bg-gold hover:text-white hover:border-gold px-8 h-12 font-body font-medium text-sm gap-2"
             >
-              <a href={ORG_WA} target="_blank" rel="noopener noreferrer">
+              <Link to="/#contacto">
                 Contratación empresas
-                <MessageCircle size={16} />
-              </a>
+                <Mail size={16} />
+              </Link>
             </Button>
           </div>
         </motion.div>
