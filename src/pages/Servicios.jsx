@@ -48,7 +48,8 @@ export default function Servicios() {
         description='La transición entre el segundo y el quinto año de vida de una empresa es el lapso de mayor vulnerabilidad y, a la vez, de mayor potencial. Este diagnóstico está diseñado para que el fundador se detenga a observar el ecosistema que ha construido. Más allá de las métricas financieras, evaluamos la alineación entre la visión personal, la salud del modelo de negocio y la capacidad de delegar.'
         image={imgAutodiagnostico}
         imageLeft={true}
-        comingSoon="Autoevaluación · Próximamente"
+        moreHref="/autoevaluacion"
+        moreLabel="Hacer la autoevaluación →"
         index={0}
       />
       <ServiceCard

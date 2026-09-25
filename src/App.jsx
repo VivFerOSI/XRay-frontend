@@ -5,6 +5,7 @@ import ScrollManager from './components/ScrollManager'
 import Home from './pages/Home'
 import Servicios from './pages/Servicios'
 import Autoevaluacion from './pages/Autoevaluacion'
+import ResultadoCompartido from './pages/ResultadoCompartido'
 import JobDescriptionPage from './pages/JobDescriptionPage'
 import ComunidadUbuntu from './pages/ComunidadUbuntu'
 import GimnasioLiderazgo from './pages/GimnasioLiderazgo'
@@ -21,6 +22,7 @@ function App() {
         <Route path="/comunidad-ubuntu" element={<ComunidadUbuntu />} />
         <Route path="/gimnasio-liderazgo" element={<GimnasioLiderazgo />} />
         <Route path="/autoevaluacion" element={<Autoevaluacion />} />
+        <Route path="/autoevaluacion/resultado/:id" element={<ResultadoCompartido />} />
       </Routes>
       <Footer />
     </div>

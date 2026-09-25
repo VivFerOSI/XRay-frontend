@@ -166,6 +166,9 @@ export default function ContactSection() {
             >
               <InstagramIcon />
             </a>
+            {/* Red social X desactivada a pedido del cliente (2026-09-24).
+                Para reactivarla, descomentar este bloque. */}
+            {/*
             <a
               href="https://x.com/XRay_genera"
               target="_blank"
@@ -175,6 +178,7 @@ export default function ContactSection() {
             >
               <XTwitterIcon />
             </a>
+            */}
           </div>
         </motion.div>
 

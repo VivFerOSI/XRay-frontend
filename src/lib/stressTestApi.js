@@ -26,4 +26,6 @@ export const stressTestApi = {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
+  // Informe ya enviado, para el enlace permanente que va en el correo.
+  submission: (id) => request(`/stress-test/submission/${id}`),
 }

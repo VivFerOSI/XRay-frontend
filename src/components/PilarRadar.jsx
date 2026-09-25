@@ -26,18 +26,18 @@ export default function PilarRadar({ pilares }) {
     <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-sm mx-auto" role="img" aria-label="Radar de puntajes por pilar">
       {/* Grilla (rings) */}
       {rings.map((r) => (
-        <polygon key={r} points={ringPoly(scoreR(r))} fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
+        <polygon key={r} className="radar-grid" points={ringPoly(scoreR(r))} fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
       ))}
       {/* Ejes */}
       {pilares.map((_, i) => {
         const [x, y] = point(i, R)
-        return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
+        return <line key={i} className="radar-grid" x1={cx} y1={cy} x2={x} y2={y} stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
       })}
       {/* Área de datos */}
-      <polygon points={poly(dataPts)} fill="rgba(200,146,42,0.22)" stroke="#C8922A" strokeWidth="2" strokeLinejoin="round" />
+      <polygon className="radar-area" points={poly(dataPts)} fill="rgba(200,146,42,0.22)" stroke="#C8922A" strokeWidth="2" strokeLinejoin="round" />
       {/* Vértices */}
       {dataPts.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="3.5" fill="#C8922A" />
+        <circle key={i} className="radar-dot" cx={x} cy={y} r="3.5" fill="#C8922A" />
       ))}
       {/* Etiquetas de pilar */}
       {pilares.map((p, i) => {
@@ -54,6 +54,7 @@ export default function PilarRadar({ pilares }) {
             dominantBaseline="middle"
             fontSize="11"
             fontFamily="Inter, sans-serif"
+            className="radar-label"
             fill="rgba(255,255,255,0.6)"
           >
             {p.name.split(' ')[0]}
