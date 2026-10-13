@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ResultadoStressTest from '@/components/ResultadoStressTest'
+import Invitar360 from '@/components/Invitar360'
 import { stressTestApi } from '@/lib/stressTestApi'
 
 /**
@@ -57,11 +58,14 @@ export default function ResultadoCompartido() {
         )}
 
         {state === 'ok' && data && (
-          <ResultadoStressTest
-            result={data.result}
-            nombreEmprendimiento={data.nombreEmprendimiento}
-            fecha={data.createdAt}
-          />
+          <>
+            <ResultadoStressTest
+              result={data.result}
+              nombreEmprendimiento={data.nombreEmprendimiento}
+              fecha={data.createdAt}
+            />
+            <Invitar360 submissionId={data.id} />
+          </>
         )}
       </div>
     </main>

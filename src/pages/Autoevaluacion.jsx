@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ResultadoStressTest from '@/components/ResultadoStressTest'
@@ -12,9 +13,12 @@ const inputClass =
   'font-body h-12 px-0 transition-colors duration-200'
 
 export default function Autoevaluacion() {
+  // `key` viene de /autoevaluacion/:key. Sin él se sirve el cuestionario
+  // por defecto, que es la ruta que ya estaba publicada.
+  const { key } = useParams()
   const [phase, setPhase] = useState('loading') // loading|error|intro|datos|quiz|contacto|result
   const [content, setContent] = useState(null)
-  const [org, setOrg] = useState({ nombreEmprendimiento: '', sector: '', antiguedad: '', tamanoEquipo: '' })
+  const [org, setOrg] = useState({})
   const [answers, setAnswers] = useState({}) // questionId -> 1..5
   const [pilarStep, setPilarStep] = useState(0)
   const [norte, setNorte] = useState('')
@@ -26,7 +30,7 @@ export default function Autoevaluacion() {
 
   useEffect(() => {
     stressTestApi
-      .content()
+      .content(key)
       .then((data) => {
         setContent(data)
         setPhase('intro')
@@ -35,7 +39,7 @@ export default function Autoevaluacion() {
         setError(e.message)
         setPhase('error')
       })
-  }, [])
+  }, [key])
 
   // Al cambiar de paso o bloque, subir al inicio del formulario.
   useEffect(() => {
@@ -45,9 +49,14 @@ export default function Autoevaluacion() {
   const pilares = content?.pilares ?? []
   const currentPilar = pilares[pilarStep]
 
+  // Cada cuestionario define qué datos son obligatorios: en el de líderes,
+  // el nombre de la organización es opcional.
   const orgComplete = useMemo(
-    () => Object.values(org).every((v) => v.trim() !== ''),
-    [org],
+    () =>
+      (content?.orgFields ?? [])
+        .filter((f) => !f.optional)
+        .every((f) => (org[f.key] ?? '').trim() !== ''),
+    [org, content],
   )
   const pilarComplete = currentPilar?.questions.every((q) => answers[q.id]) ?? false
   const contactoComplete =
@@ -58,6 +67,10 @@ export default function Autoevaluacion() {
     setBusy(true)
     try {
       const payload = {
+        nombreEmprendimiento: '',
+        sector: '',
+        antiguedad: '',
+        tamanoEquipo: '',
         ...org,
         nombreContacto: contacto.nombreContacto.trim(),
         email: contacto.email.trim(),
@@ -69,7 +82,7 @@ export default function Autoevaluacion() {
           value,
         })),
       }
-      const data = await stressTestApi.submit(payload)
+      const data = await stressTestApi.submit(payload, key)
       setResult(data.result)
       setPhase('result')
       window.scrollTo(0, 0)
@@ -81,7 +94,7 @@ export default function Autoevaluacion() {
   }
 
   function reset() {
-    setOrg({ nombreEmprendimiento: '', sector: '', antiguedad: '', tamanoEquipo: '' })
+    setOrg({})
     setAnswers({})
     setPilarStep(0)
     setNorte('')
@@ -118,13 +131,54 @@ export default function Autoevaluacion() {
             <p className="font-body font-semibold text-gold tracking-[0.2em] text-[11px] uppercase mb-4">
               Diagnóstico
             </p>
-            <h1 className="font-display font-bold text-white text-3xl lg:text-4xl leading-tight mb-6">
-              {content.title}
+            <h1 className="font-display font-bold text-white text-3xl lg:text-4xl leading-tight mb-3">
+              {content.nombrePublico ?? content.title}
             </h1>
+            {content.subtitulo && (
+              <p className="font-body text-gold text-base mb-6">{content.subtitulo}</p>
+            )}
             <p className="font-body text-white/65 text-base leading-relaxed mb-10 max-w-xl mx-auto">
-              25 afirmaciones en 5 pilares. Respondé según cuánto coincidís con cada una (1 a 5). Al
-              finalizar vas a recibir tu nivel de robustez y una devolución por pilar. Toma unos 10 minutos.
+              {content.orientadoA ?? content.intro}
             </p>
+
+            {/* Qué revisa y qué deja. Sólo lo traen los cuestionarios de
+                gestión del desempeño; el del emprendimiento va sin esto. */}
+            {(content.explora?.length > 0 || content.aporta) && (
+              <div className="grid sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-10">
+                {content.explora?.length > 0 && (
+                  <div className="rounded-2xl border border-white/10 bg-white/3 p-6">
+                    <p className="font-body font-semibold text-[11px] uppercase tracking-[0.2em] text-gold mb-4">
+                      Explora
+                    </p>
+                    <ul className="flex flex-col gap-2.5">
+                      {content.explora.map((t) => (
+                        <li key={t} className="flex gap-2.5 font-body text-white/70 text-sm leading-relaxed">
+                          <Check className="text-gold shrink-0 mt-0.5" size={15} />
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {content.aporta && (
+                  <div className="rounded-2xl border border-gold/25 bg-gold/5 p-6">
+                    <p className="font-body font-semibold text-[11px] uppercase tracking-[0.2em] text-gold mb-4">
+                      Aporta
+                    </p>
+                    <p className="font-body text-white/70 text-sm leading-relaxed">{content.aporta}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Con la presentación larga arriba, el detalle operativo del
+                cuestionario (cuántas preguntas, cuánto tarda) va acá abajo. */}
+            {content.orientadoA && (
+              <p className="font-body text-white/40 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+                {content.intro}
+              </p>
+            )}
+
             <Button
               onClick={() => setPhase('datos')}
               className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2"
@@ -137,18 +191,31 @@ export default function Autoevaluacion() {
         {/* ── DATOS DEL EMPRENDIMIENTO ── */}
         {phase === 'datos' && content && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h2 className="font-display font-bold text-white text-2xl mb-8">Sobre tu emprendimiento</h2>
+            <h2 className="font-display font-bold text-white text-2xl mb-8">{content.orgFieldsTitle ?? 'Sobre tu emprendimiento'}</h2>
             <div className="flex flex-col gap-6">
               {content.orgFields.map((f) => (
                 <div key={f.key} className="flex flex-col gap-1">
                   <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">{f.label}</label>
-                  <Input
-                    value={org[f.key]}
-                    onChange={(e) => setOrg({ ...org, [f.key]: e.target.value })}
-                    placeholder={f.placeholder}
-                    maxLength={120}
-                    className={inputClass}
-                  />
+                  {f.options?.length ? (
+                    <select
+                      value={org[f.key] ?? ''}
+                      onChange={(e) => setOrg({ ...org, [f.key]: e.target.value })}
+                      className={`${inputClass} cursor-pointer appearance-none`}
+                    >
+                      <option value="" disabled className="bg-navy-deep">{f.placeholder}</option>
+                      {f.options.map((o) => (
+                        <option key={o} value={o} className="bg-navy-deep">{o}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <Input
+                      value={org[f.key] ?? ''}
+                      onChange={(e) => setOrg({ ...org, [f.key]: e.target.value })}
+                      placeholder={f.placeholder}
+                      maxLength={120}
+                      className={inputClass}
+                    />
+                  )}
                 </div>
               ))}
             </div>

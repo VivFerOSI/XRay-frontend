@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import ServiceCard from '../components/ServiceCard'
+import GestionDesempeno from '../components/GestionDesempeno'
+import { GESTION_DESEMPENO_VISIBLE } from '../lib/flags'
 
 import imgAutodiagnostico from '../assets/Dollarphotoclub_80013806 Autod emprendedor.jpg'
 import imgGimnasioMente from '../assets/iStock-978387300.jpg'
@@ -39,6 +41,16 @@ export default function Servicios() {
           transition={{ duration: 0.7, delay: 0.3 }}
         />
       </div>
+
+      {/* ── GESTIÓN DEL DESEMPEÑO ──
+          Va primero por pedido del cliente, delante del autodiagnóstico del
+          emprendedor. Escondido hasta la fecha de publicación. */}
+      {GESTION_DESEMPENO_VISIBLE && (
+        <>
+          <SectionDivider label="Gestión del desempeño" />
+          <GestionDesempeno />
+        </>
+      )}
 
       {/* ── PARA LÍDERES ── */}
       <SectionDivider label="Para líderes" />

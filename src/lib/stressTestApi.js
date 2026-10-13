@@ -19,13 +19,36 @@ async function request(path, options = {}) {
   return res.json()
 }
 
+// Las rutas sin key responden el cuestionario por defecto (emprendimiento).
+const base = (key) => (key ? `/stress-test/${key}` : '/stress-test')
+
 export const stressTestApi = {
-  content: () => request('/stress-test/content'),
-  submit: (payload) =>
-    request('/stress-test/submit', {
+  // Cuestionarios disponibles.
+  list: () => request('/stress-test'),
+  content: (key) => request(`${base(key)}/content`),
+  submit: (payload, key) =>
+    request(`${base(key)}/submit`, {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
   // Informe ya enviado, para el enlace permanente que va en el correo.
   submission: (id) => request(`/stress-test/submission/${id}`),
+
+  // ── Evaluación 360° ──
+  estado360: (submissionId) => request(`/evaluacion-360/${submissionId}`),
+  invitar360: (submissionId, evaluadores) =>
+    request(`/evaluacion-360/${submissionId}/invitar`, {
+      method: 'POST',
+      body: JSON.stringify({ evaluadores }),
+    }),
+  comparativo360: (submissionId) =>
+    request(`/evaluacion-360/${submissionId}/comparativo`),
+
+  // Lo que abre quien fue invitado a evaluar, con el token de su enlace.
+  evaluacion: (token) => request(`/evaluacion/${token}`),
+  responderEvaluacion: (token, answers) =>
+    request(`/evaluacion/${token}`, {
+      method: 'POST',
+      body: JSON.stringify({ answers }),
+    }),
 }
