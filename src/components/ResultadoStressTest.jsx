@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { MessageCircle, Printer, RotateCcw } from 'lucide-react'
+import { Dumbbell, MessageCircle, Printer } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import PilarRadar from '@/components/PilarRadar'
 
@@ -22,13 +23,14 @@ export function bandColor(score) {
  * devolución por pilar puede ser un párrafo o una lista, y el cierre puede
  * venir del cruce entre el norte elegido y el nivel alcanzado.
  *
- * `onReset` solo lo pasa el flujo; en el enlace permanente no aplica.
+ * Al pie, el paso siguiente: hablar con X-Ray o entrenar en el Gimnasio de
+ * Liderazgo. Antes había un "Hacerlo de nuevo" que invitaba a repetir el
+ * cuestionario recién terminado, que no lleva a ninguna parte.
  */
 export default function ResultadoStressTest({
   result,
   nombreEmprendimiento,
   fecha,
-  onReset,
 }) {
   const titulo = result.assessmentTitle ?? 'Stress Test de Robustez y Crecimiento'
   const corto = result.assessmentShortName ?? 'Stress Test'
@@ -150,11 +152,15 @@ export default function ResultadoStressTest({
         >
           <Printer size={15} /> Descargar mi informe
         </Button>
-        {onReset && (
-          <Button variant="ghost" onClick={onReset} className="text-white/60 hover:text-gold hover:bg-transparent gap-2">
-            <RotateCcw size={15} /> Hacerlo de nuevo
-          </Button>
-        )}
+        <Button
+          asChild
+          variant="ghost"
+          className="text-white/60 hover:text-gold hover:bg-transparent gap-2"
+        >
+          <Link to="/gimnasio-liderazgo">
+            <Dumbbell size={15} /> Gimnasio de Liderazgo
+          </Link>
+        </Button>
       </div>
     </motion.div>
   )

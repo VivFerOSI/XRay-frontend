@@ -76,6 +76,13 @@ function App() {
             <Route path="/evaluacion/:token" element={<EvaluacionTercero />} />
           </Route>
 
+          {/* Atajos para repartir en flyers y mensajes: más cortos de leer y de
+              dictar que la ruta real, que además nombra al cuestionario de la
+              Persona Evaluada por su clave interna (`lider`). */}
+          <Route path="/evaluador" element={<Navigate to="/autoevaluacion/evaluador" replace />} />
+          <Route path="/persona-evaluada" element={<Navigate to="/autoevaluacion/lider" replace />} />
+          <Route path="/emprendedor" element={<Navigate to="/autoevaluacion" replace />} />
+
           {/* Cualquier otra dirección va al inicio. Firebase sirve el index
               para todo, así que sin esto una URL mal escrita —o /admin con el
               panel todavía sin publicar— deja la pantalla en blanco. */}

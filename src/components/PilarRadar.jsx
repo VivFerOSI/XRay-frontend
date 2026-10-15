@@ -7,9 +7,13 @@ export default function PilarRadar({ pilares }) {
   const N = pilares.length
   if (!N) return null
 
-  const size = 340
-  const cx = size / 2
-  const cy = size / 2
+  // El lienzo es más ancho que alto para que entren las etiquetas laterales:
+  // con un cuadrado de 340 el navegador recortaba "Conciencia" por la derecha
+  // y "Continuidad" por la izquierda.
+  const ancho = 440
+  const alto = 340
+  const cx = ancho / 2
+  const cy = alto / 2
   const R = 106
   const maxScore = 25
   const rings = [5, 10, 15, 20, 25]
@@ -23,7 +27,7 @@ export default function PilarRadar({ pilares }) {
   const dataPts = pilares.map((p, i) => point(i, scoreR(p.score)))
 
   return (
-    <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-sm mx-auto" role="img" aria-label="Radar de puntajes por pilar">
+    <svg viewBox={`0 0 ${ancho} ${alto}`} className="w-full max-w-md mx-auto" role="img" aria-label="Radar de puntajes por pilar">
       {/* Grilla (rings) */}
       {rings.map((r) => (
         <polygon key={r} className="radar-grid" points={ringPoly(scoreR(r))} fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
@@ -57,7 +61,9 @@ export default function PilarRadar({ pilares }) {
             className="radar-label"
             fill="rgba(255,255,255,0.6)"
           >
-            {p.name.split(' ')[0]}
+            {/* Primera palabra, sin la puntuación que arrastra: "Continuidad,
+                Coaching y Seguimiento" queda en "Continuidad". */}
+            {p.name.split(' ')[0].replace(/[,.;:]+$/, '')}
           </text>
         )
       })}

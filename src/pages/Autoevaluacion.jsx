@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ResultadoStressTest from '@/components/ResultadoStressTest'
@@ -27,6 +27,10 @@ export default function Autoevaluacion() {
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  // Se enciende al primer intento de enviar: recién ahí se marca lo que falta.
+  // Antes de intentar, señalar errores sería regañar a quien todavía está
+  // completando el formulario.
+  const [intento, setIntento] = useState(false)
 
   useEffect(() => {
     stressTestApi
@@ -59,10 +63,35 @@ export default function Autoevaluacion() {
     [org, content],
   )
   const pilarComplete = currentPilar?.questions.every((q) => answers[q.id]) ?? false
-  const contactoComplete =
-    norte && contacto.nombreContacto.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto.email) && consent
+  /**
+   * Qué falta para poder enviar, en palabras.
+   *
+   * El botón deshabilitado no alcanza: la pregunta del norte queda arriba de
+   * todo y, al completar los datos de contacto, se pierde de vista. Más de una
+   * persona creyó que el botón estaba roto cuando en realidad le faltaba
+   * elegir el norte.
+   */
+  const faltantes = [
+    !norte && 'elegir tu norte',
+    !contacto.nombreContacto.trim() && 'tu nombre',
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto.email) && 'un correo válido',
+    !consent && 'aceptar el uso de tus datos',
+  ].filter(Boolean)
+  const contactoComplete = faltantes.length === 0
 
   async function handleSubmit() {
+    // El botón nunca queda mudo: si falta algo, lleva hasta ahí en vez de
+    // dejar a la persona adivinando por qué no pasa nada.
+    if (faltantes.length > 0) {
+      setIntento(true)
+      const destino = !norte ? 'paso-norte' : 'paso-contacto'
+      document.getElementById(destino)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+      return
+    }
+
     setError('')
     setBusy(true)
     try {
@@ -91,18 +120,6 @@ export default function Autoevaluacion() {
     } finally {
       setBusy(false)
     }
-  }
-
-  function reset() {
-    setOrg({})
-    setAnswers({})
-    setPilarStep(0)
-    setNorte('')
-    setContacto({ nombreContacto: '', email: '', telefono: '' })
-    setConsent(false)
-    setResult(null)
-    setPhase('intro')
-    window.scrollTo(0, 0)
   }
 
   return (
@@ -197,16 +214,33 @@ export default function Autoevaluacion() {
                 <div key={f.key} className="flex flex-col gap-1">
                   <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">{f.label}</label>
                   {f.options?.length ? (
-                    <select
-                      value={org[f.key] ?? ''}
-                      onChange={(e) => setOrg({ ...org, [f.key]: e.target.value })}
-                      className={`${inputClass} cursor-pointer appearance-none`}
-                    >
-                      <option value="" disabled className="bg-navy-deep">{f.placeholder}</option>
-                      {f.options.map((o) => (
-                        <option key={o} value={o} className="bg-navy-deep">{o}</option>
-                      ))}
-                    </select>
+                    // `appearance-none` saca la flecha del sistema, así que la
+                    // ponemos nosotros: sin ella el campo parece de escritura.
+                    // Mientras no hay elección, el texto va tenue como los
+                    // placeholders de los demás campos.
+                    <div className="relative">
+                      <select
+                        value={org[f.key] ?? ''}
+                        onChange={(e) => setOrg({ ...org, [f.key]: e.target.value })}
+                        className={`${inputClass} w-full cursor-pointer appearance-none pr-8 ${
+                          org[f.key] ? 'text-white' : 'text-white/25'
+                        }`}
+                      >
+                        <option value="" disabled className="bg-navy-deep text-white/50">
+                          {f.placeholder}
+                        </option>
+                        {f.options.map((o) => (
+                          <option key={o} value={o} className="bg-navy-deep text-white">
+                            {o}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown
+                        size={16}
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-gold"
+                      />
+                    </div>
                   ) : (
                     <Input
                       value={org[f.key] ?? ''}
@@ -303,23 +337,38 @@ export default function Autoevaluacion() {
         {/* ── NORTE + CONTACTO ── */}
         {phase === 'contacto' && content && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h2 className="font-display font-bold text-white text-2xl mb-6">{content.norte.question}</h2>
-            <div className="flex flex-col gap-3 mb-10">
-              {content.norte.options.map((o) => (
-                <button
-                  key={o.key}
-                  type="button"
-                  onClick={() => setNorte(o.key)}
-                  className={`text-left rounded-xl border px-5 py-4 font-body text-sm leading-relaxed transition-all duration-150 ${
-                    norte === o.key ? 'border-gold bg-gold/10 text-white' : 'border-white/15 text-white/65 hover:border-gold/50'
-                  }`}
-                >
-                  {o.label}
-                </button>
-              ))}
+            <div id="paso-norte" className="scroll-mt-24">
+              <h2 className="font-display font-bold text-white text-2xl mb-2">{content.norte.question}</h2>
+              <p
+                className={`font-body text-sm mb-6 transition-colors duration-200 ${
+                  intento && !norte ? 'text-gold' : 'text-white/40'
+                }`}
+              >
+                Elegí una de las dos opciones.
+              </p>
+              <div className="flex flex-col gap-3 mb-10">
+                {content.norte.options.map((o) => (
+                  <button
+                    key={o.key}
+                    type="button"
+                    onClick={() => setNorte(o.key)}
+                    className={`text-left rounded-xl border px-5 py-4 font-body text-sm leading-relaxed transition-all duration-150 ${
+                      norte === o.key
+                        ? 'border-gold bg-gold/10 text-white'
+                        : intento && !norte
+                          ? 'border-gold/45 text-white/75 hover:border-gold'
+                          : 'border-white/15 text-white/65 hover:border-gold/50'
+                    }`}
+                  >
+                    {o.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <h3 className="font-display font-bold text-white text-xl mb-6">¿A dónde te enviamos la devolución?</h3>
+            <h3 id="paso-contacto" className="font-display font-bold text-white text-xl mb-6 scroll-mt-24">
+              ¿A dónde te enviamos la devolución?
+            </h3>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-1">
                 <label className="font-body text-[11px] text-white/40 tracking-widest uppercase">Nombre y apellido</label>
@@ -343,13 +392,26 @@ export default function Autoevaluacion() {
 
             {error && <p className="font-body text-rose-300 text-sm mt-6">{error}</p>}
 
-            <div className="flex justify-between mt-10">
+            {/* Lo que falta, dicho en voz alta: sin esto el botón apagado no
+                explica nada y parece que el sitio no anda. */}
+            {intento && faltantes.length > 0 && (
+              <p role="alert" className="font-body text-gold/80 text-sm mt-8 text-right">
+                {faltantes.length === 1 ? 'Falta ' : 'Faltan '}
+                {faltantes.length === 1
+                  ? faltantes[0]
+                  : `${faltantes.slice(0, -1).join(', ')} y ${faltantes.at(-1)}`}
+                .
+              </p>
+            )}
+
+            <div className={`flex justify-between ${intento && faltantes.length > 0 ? 'mt-3' : 'mt-10'}`}>
               <Button variant="ghost" onClick={() => setPhase('quiz')} className="text-white/60 hover:text-gold hover:bg-transparent gap-2">
                 <ArrowLeft size={16} /> Atrás
               </Button>
               <Button
                 onClick={handleSubmit}
-                disabled={!contactoComplete || busy}
+                disabled={busy}
+                aria-disabled={!contactoComplete}
                 className="bg-gold text-white hover:bg-gold/90 border-0 rounded-full px-8 h-12 font-body font-semibold text-sm gap-2 disabled:opacity-40"
               >
                 {busy ? <><Loader2 className="animate-spin" size={16} /> Calculando…</> : <>Ver mi resultado <ArrowRight size={16} /></>}
@@ -363,7 +425,6 @@ export default function Autoevaluacion() {
           <ResultadoStressTest
             result={result}
             nombreEmprendimiento={org.nombreEmprendimiento}
-            onReset={reset}
           />
         )}
       </div>
