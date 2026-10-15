@@ -8,9 +8,31 @@
         "destination": "/index.html"
       }
     ],
+    "comment": [
+      "Las reglas se evalúan en orden y la última que coincide gana, así que la",
+      "general va primera y las excepciones después.",
+      "",
+      "Todo lo que no sea un archivo con hash se revalida en cada visita. El",
+      "index.html es el que decide qué bundle cargar: si se cachea, después de",
+      "cada despliegue la gente sigue abriendo la versión anterior hasta que el",
+      "navegador decide refrescar. Con una hora de caché, una dirección nueva",
+      "parecía no existir y el sitio la mandaba al inicio.",
+      "",
+      "Los archivos de assets sí se cachean para siempre porque llevan el hash",
+      "del contenido en el nombre: si cambian, cambia el nombre."
+    ],
     "headers": [
       {
-        "source": "**/*.@(js|css|svg|png|jpg|jpeg|webp|woff|woff2)",
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "**/assets/**",
         "headers": [
           {
             "key": "Cache-Control",
