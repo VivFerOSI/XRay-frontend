@@ -28,6 +28,12 @@ export default function AdminResultados() {
     adminApi.assessments().then(setCuestionarios).catch(() => setCuestionarios([]))
   }, [])
 
+  // El envío guarda la clave del cuestionario ("lider"), que no le dice nada a
+  // quien mira la tabla. Si todavía no cargó el listado, se muestra la clave.
+  const nombrePorKey = Object.fromEntries(
+    cuestionarios.map((c) => [c.key, c.shortName || c.title]),
+  )
+
   const cargar = useCallback(async () => {
     setEstado('cargando')
     try {
@@ -140,7 +146,9 @@ export default function AdminResultados() {
                       <td className="px-4 py-3 font-body text-white/60 text-sm">
                         {s.nombreEmprendimiento || <span className="text-white/25">—</span>}
                       </td>
-                      <td className="px-4 py-3 font-body text-white/50 text-xs">{s.assessmentKey}</td>
+                      <td className="px-4 py-3 font-body text-white/50 text-xs">
+                        {nombrePorKey[s.assessmentKey] ?? s.assessmentKey}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <Link to={`/admin/resultados/${s.id}`} className="hover:opacity-80">
                           <span className={`font-body font-semibold text-sm ${nivelColor[s.globalLevel] ?? 'text-white'}`}>
